@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xenon România — Redeschidere Oficiala</title>
+  <meta name="description" content="Xenon Romania se redeschide oficial! Acum chiar mai bun si mai optimizat." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            neon: '#39FF14',
+            dark: '#0B0F14',
+            panel: '#0F1620',
+            soft: '#B5FFB1'
+          },
+          boxShadow: {
+            neon: '0 0 15px rgba(57,255,20,0.6), 0 0 40px rgba(57,255,20,0.25)'
+          },
+          dropShadow: {
+            neon: '0 0 10px rgba(57,255,20,0.8)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .bg-grid {
+      background: radial-gradient(ellipse at top left, rgba(57, 255, 20, 0.08), transparent 40%),
+        radial-gradient(ellipse at bottom right, rgba(57, 255, 20, 0.06), transparent 40%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+    }
+
+    .glow-text {
+      text-shadow: 0 0 12px rgba(57, 255, 20, 0.7);
+    }
+
+    .card-glass {
+      background: rgba(15, 22, 32, 0.8);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-dark text-white selection:bg-neon selection:text-black">
+  <header class="sticky top-0 z-40 bg-dark/80 backdrop-blur border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+          class="drop-shadow-neon">
+          <path d="M12 2L3 7v10l9 5 9-5V7l-9-5Z" stroke="#39FF14" stroke-width="1.4" />
+          <path d="M12 7v10" stroke="#39FF14" stroke-width="1.2" />
+          <path d="M3 7l9 5 9-5" stroke="#39FF14" stroke-width="1.2" />
+        </svg>
+        <span class="font-semibold tracking-wide">Xenon România</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#status" class="hover:text-neon">Status</a>
+        <a href="#echipa" class="hover:text-neon">Echipa</a>
+        <a href="#banatsync" class="hover:text-neon">Partener</a>
+        <a href="#despre" class="hover:text-neon">Despre</a>
+        <a href="https://store.xenon-romania.ro" class="hover:text-neon">Magazin</a>
+        <a href="#social" class="hover:text-neon">Social</a>
+      </nav>
+      <a href="#status" class="px-4 py-2 rounded-xl bg-neon text-black font-semibold hover:shadow-neon transition">Joacă
+        acum</a>
+    </div>
+  </header>
+
+  <section class="bg-grid pt-16">
+    <div class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight glow-text">
+          O experiență Minecraft <span class="text-neon">unică</span>,
+          pe comunitatea <span class="text-neon">Xenon România</span>
+        </h1>
+        <p class="mt-5 text-white/80">Experienta unica de joc, doar la noi pe comunitate! Avem parteneriat oficial cu
+          BanatSync.</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <button id="copyIP" class="px-5 py-3 rounded-xl bg-panel border border-white/10 hover:border-neon/60 hover:shadow-neon transition flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse" id="dot"></span>
+            <span class="text-white/90">IP: <strong class="font-semibold" id="serverIp">play.xenon-romania.ro</strong></span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16h8M8 12h8m-7 8h6a2 2 0 002-2V6a2 2 0 00-2-2H9L7 6v12a2 2 0 002 2z"/>
+            </svg>
+          </button>
+          <a href="#status"
+            class="px-5 py-3 rounded-xl bg-neon text-black font-bold hover:shadow-neon transition text-center">Vezi
+            status server</a>
+        </div>
+        <p id="copyMsg" class="mt-2 text-sm text-soft hidden">IP copiat în clipboard. Ne vedem pe server! ✨</p>
+      </div>
+
+      <div class="relative">
+        <div class="absolute -inset-1 bg-neon/20 blur-2xl rounded-3xl"></div>
+        <div class="relative card-glass rounded-3xl p-6">
+          <div class="grid grid-cols-2 gap-4 text-sm">
+            <div class="rounded-2xl p-4 bg-black/30 border border-white/10">
+              <p class="text-white/65">Status</p>
+              <p id="statusText" class="text-xl font-bold mt-1">Verific...</p>
+            </div>
+            <div class="rounded-2xl p-4 bg-black/30 border border-white/10">
+              <p class="text-white/65">Jucători online</p>
+              <p id="playersText" class="text-xl font-bold mt-1">—</p>
+            </div>
+            <div class="rounded-2xl p-4 bg-black/30 border border-white/10">
+              <p class="text-white/65">Versiune</p>
+              <p id="versionText" class="text-xl font-bold mt-1">—</p>
+            </div>
+          </div>
+          <p class="text-xs text-white/50 mt-4">* Date preluate automat din
+            <span class="text-neon">play.xenon-romania.ro</span> (refresh la 60s).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="status" class="py-16 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Status server</h2>
+      <div class="card-glass rounded-3xl p-6">
+        <div id="motd" class="text-lg text-white/80"></div>
+        <div class="mt-4 flex flex-wrap gap-3 items-center text-sm">
+          <span class="px-3 py-1 rounded-full bg-black/40 border border-white/10" id="srvOnline">—</span>
+          <span class="px-3 py-1 rounded-full bg-black/40 border border-white/10" id="srvPlayers">—</span>
+          <span class="px-3 py-1 rounded-full bg-black/40 border border-white/10" id="srvVersion">—</span>
+          <span class="px-3 py-1 rounded-full bg-black/40 border border-white/10" id="srvIP">play.xenon-romania.ro</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="echipa" class="py-16 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-end justify-between gap-4 mb-6">
+        <h2 class="text-3xl md:text-4xl font-bold">Echipa noastră</h2>
+        <p class="text-white/60 text-sm">Aceasta este echipa noastra staff.</p>
+      </div>
+      <div id="teamGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <section id="banatsync" class="py-16 border-t border-white/10 bg-black/20">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Parteneriat cu <span class="text-neon">BanatSync.com</span></h2>
+        <ul class="space-y-2 text-white/80 list-disc list-inside">
+          <li>Xenon România este găzduit pe infrastructura BanatSync.</li>
+          <li>VPS-uri de top pentru performanță și stabilitate.</li>
+          <li>Servicii la cele mai bune prețuri de pe piață.</li>
+        </ul>
+        <a href="https://banatsync.com" target="_blank" rel="noopener"
+          class="inline-block mt-6 px-5 py-3 rounded-xl bg-neon text-black font-bold hover:shadow-neon transition">Vizitează
+          BanatSync</a>
+      </div>
+      <div class="relative">
+        <div class="absolute -inset-1 bg-neon/15 blur-2xl rounded-3xl"></div>
+        <div class="relative card-glass rounded-3xl p-6">
+          <h3 class="text-xl font-semibold mb-2">Găzduire de încredere</h3>
+          <p class="text-white/75">Infrastructură optimizată pentru servere de jocuri, latență redusă și uptime ridicat.
+            Ideal pentru comunități Minecraft serioase.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="despre" class="py-16 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Despre noi</h2>
+      <p class="text-white/80 max-w-3xl">Xenon România este un server de Minecraft care doreste sa ofere o experinta
+        unica de joc. Te așteptăm alături de noi!</p>
+      <p class="text-white/80 max-w-3xl">Daca doresti sa sustii proiectul, poti achiztiona ceva de pe
+        <a href="https://store.xenon-romania.ro" target="_blank" class="text-neon hover:drop-shadow-neon">Magazinul
+          Nostru</a>.
+      </p>
+    </div>
+  </section>
+
+  <section id="social" class="py-16 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6">Alătură-te comunității</h2>
+      <div class="flex flex-wrap gap-4">
+        <a href="https://discord.xenon-romania.ro" target="_blank" rel="noopener"
+          class="px-5 py-3 rounded-xl bg-panel border border-white/10 hover:border-neon/60 hover:shadow-neon transition flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
+            <path
+              d="M20.317 4.369A19.91 19.91 0 0016.558 3c-.2.358-.43.84-.589 1.215a18.27 18.27 0 00-7.938 0A8.258 8.258 0 007.442 3 19.889 19.889 0 003.68 4.37C1.515 7.733.796 10.99 1.01 14.207a19.97 19.97 0 005.993 3.05c.484-.676.917-1.394 1.291-2.144a12.9 12.9 0 01-2.04-.979c.17-.123.336-.252.496-.387a13.9 13.9 0 007.5 0c.161.135.327.264.496.387-.653.38-1.34.7-2.04.98.374.75.807 1.468 1.29 2.143a19.97 19.97 0 005.994-3.05c.262-3.8-.62-7.03-2.773-9.84zM9.5 13.5c-.66 0-1.2-.72-1.2-1.6s.53-1.6 1.2-1.6c.66 0 1.2.72 1.2 1.6s-.54 1.6-1.2 1.6zm5 0c-.66 0-1.2-.72-1.2-1.6s.54-1.6 1.2-1.6 1.2.72 1.2 1.6-.54 1.6-1.2 1.6z" />
+          </svg>
+          Discord
+        </a>
+        <a href="https://vote.xenon-romania.ro" target="_blank" rel="noopener"
+          class="px-5 py-3 rounded-xl bg-panel border border-white/10 hover:border-neon/60 hover:shadow-neon transition">Votează
+          serverul</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/10 py-8">
+    <div
+      class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-white/60 text-sm">
+      <p>© <span id="year"></span> Xenon România. Toate drepturile rezervate.</p>
+      <p>Găzduit cu drag de <a href="https://banatsync.com" target="_blank"
+          class="text-neon hover:drop-shadow-neon">BanatSync</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ----------------- CONFIG -----------------
+    const SERVER_ADDRESS = 'play.xenon-romania.ro';
+    const STATUS_API = `https://api.mcsrvstat.us/2/${SERVER_ADDRESS}`;
+
+    // ----------------- MOTD PARSER -----------------
+    function formatMotd(input = '') {
+      if (!input) return '';
+      const str = Array.isArray(input) ? input.join('\n') : String(input);
+
+      const colorMap = {
+        '0':'#000000','1':'#0000AA','2':'#00AA00','3':'#00AAAA',
+        '4':'#AA0000','5':'#AA00AA','6':'#FFAA00','7':'#AAAAAA',
+        '8':'#555555','9':'#5555FF','a':'#55FF55','b':'#55FFFF',
+        'c':'#FF5555','d':'#FF55FF','e':'#FFFF55','f':'#FFFFFF'
+      };
+
+      const state = { color:'#FFFFFF', bold:false, italic:false, underline:false, strike:false };
+      const styleStr = () => {
+        let s = `color:${state.color};`;
+        if (state.bold) s += 'font-weight:bold;';
+        if (state.italic) s += 'font-style:italic;';
+        const dec = [];
+        if (state.underline) dec.push('underline');
+        if (state.strike) dec.push('line-through');
+        if (dec.length) s += `text-decoration:${dec.join(' ')};`;
+        return s;
+      };
+      const reset = () => { state.color='#FFFFFF'; state.bold=state.italic=state.underline=state.strike=false; };
+
+      let out = '', buf = '';
+      const flush = () => { if (buf) { out += `<span style="${styleStr()}">${buf}</span>`; buf=''; } };
+
+      for (let i = 0; i < str.length; i++) {
+        const ch = str[i];
+        if (ch === '\n') { flush(); out += '<br>'; continue; }
+
+        if (ch === '§') {
+          // HEX: §x§R§R§G§G§B§B
+          if (str[i+1]?.toLowerCase() === 'x' && str.slice(i, i+14).match(/^§x(§[0-9A-Fa-f]){6}/)) {
+            const hex = '#' + str.slice(i+2, i+14).replace(/§/g, '');
+            flush(); state.color = hex; i += 13;
+            continue;
+          }
+          const code = str[i+1]?.toLowerCase();
+          if (code) {
+            flush();
+            if (code in colorMap) {
+              state.color = colorMap[code];
+            } else {
+              switch (code) {
+                case 'l': state.bold = true; break;
+                case 'o': state.italic = true; break;
+                case 'n': state.underline = true; break;
+                case 'm': state.strike = true; break;
+                case 'r': reset(); break;
+                // §k ignorat în browser
+              }
+            }
+            i++; // consumăm codul
+            continue;
+          }
+        }
+        buf += ch;
+      }
+      flush();
+      return out;
+    }
+
+    // ----------------- TEAM CARDS -----------------
+    const TEAM = [
+      { name: 'D31U', role: 'Owner' },
+      { name: 'zEmi_69', role: 'Owner' },
+      { name: '__Septy', role: 'Owner' },
+    ];
+    const teamGrid = document.getElementById('teamGrid');
+    TEAM.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'card-glass rounded-3xl p-6 flex items-center gap-4';
+      card.innerHTML = `
+        <img src="https://minotar.net/avatar/${encodeURIComponent(m.name)}?size=96&overlay" alt="${m.name}" class="w-20 h-20 rounded-2xl ring-1 ring-white/10"/>
+        <div>
+          <p class="text-lg font-semibold">${m.name}</p>
+          <p class="text-neon">${m.role}</p>
+        </div>
+      `;
+      teamGrid.appendChild(card);
+    });
+
+    // ----------------- STATUS FETCH -----------------
+    async function fetchStatus() {
+      try {
+        const res = await fetch(STATUS_API, { cache: 'no-store' });
+        const data = await res.json();
+        const online = !!data?.online;
+
+        // header status
+        document.getElementById('statusText').textContent = online ? 'Online' : 'Offline';
+        document.getElementById('dot').className = `w-2 h-2 rounded-full ${online ? 'bg-neon' : 'bg-red-500'} animate-pulse`;
+
+        const playersNow = data?.players?.online ?? 0;
+        const playersMax = data?.players?.max ?? '—';
+        document.getElementById('playersText').textContent = online ? `${playersNow}/${playersMax}` : '—';
+        document.getElementById('versionText').textContent = data?.version || '—';
+
+        const pingValue = (typeof data?.ping === 'number' && isFinite(data.ping)) ? `${data.ping} ms` : '—';
+        document.getElementById('pingText').textContent = online ? pingValue : '—';
+
+        // chips
+        const srvOnline = document.getElementById('srvOnline');
+        srvOnline.textContent = online ? 'Server online ✅' : 'Server offline ⛔';
+        srvOnline.className = `px-3 py-1 rounded-full border ${online ? 'bg-green-500/10 border-green-400/30 text-green-300' : 'bg-red-500/10 border-red-400/30 text-red-300'}`;
+
+        document.getElementById('srvPlayers').textContent = online ? `Jucători: ${playersNow}/${playersMax}` : 'Jucători: —';
+        document.getElementById('srvVersion').textContent = `Versiune: ${data?.version || '—'}`;
+
+        // MOTD
+        const motdEl = document.getElementById('motd');
+        const motdSrc = (data?.motd?.raw && data.motd.raw) || (data?.motd?.clean && data.motd.clean) || '';
+        motdEl.innerHTML = motdSrc ? formatMotd(motdSrc) : '<span class="text-white/60">Fără MOTD disponibil.</span>';
+      } catch (e) {
+        document.getElementById('statusText').textContent = 'Eroare';
+        const so = document.getElementById('srvOnline');
+        so.textContent = 'Eroare la status';
+        so.className = 'px-3 py-1 rounded-full bg-red-500/10 border border-red-400/30 text-red-300';
+      }
+    }
+
+    // Copy IP
+    document.getElementById('copyIP').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(SERVER_ADDRESS);
+        document.getElementById('copyMsg').classList.remove('hidden');
+        setTimeout(() => document.getElementById('copyMsg').classList.add('hidden'), 2000);
+      } catch {}
+    });
+
+    // init
+    fetchStatus();
+    setInterval(fetchStatus, 60000);
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
